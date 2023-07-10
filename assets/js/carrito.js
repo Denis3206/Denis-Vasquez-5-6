@@ -41,12 +41,13 @@ carritoCompleto.forEach((producto) => {
         <div class="cart-item">
         <p class="card-title">${producto.nombre}</p>
         <p class="card-text">$${producto.precio}</p>
-        <button class="btn btn-danger btn-sm elim-prod" id="borrar${idProd}">x</button>
         </div>
+        
+        <button class="btn btn-danger btn-sm elim-prod" id="borrar${idProd}">x</button>
                                 `;
   let precio = parseInt(producto.precio);
   sumaTotal = sumaTotal + precio;
-  carritoContainer.appendChild(prodCarrito);
+  cart_container.appendChild(prodCarrito);
   let btnBorrar = document.getElementById(`borrar${idProd}`);
   btnBorrar.addEventListener("click", (e) => {
     
@@ -67,9 +68,9 @@ carritoCompleto.forEach((producto) => {
     
     localStorage.setItem("carrito", JSON.stringify(carritoCompleto));
     if (carritoCompleto.length == 0) {
-      carritoContainer.innerHTML = `
-                                        <h3>El carrito está vacío</h3>
-                                        <a class="login-submit btn btn-primary" href="../index.html">¡Compra algo!</a>
+      cart_container.innerHTML = `
+                       <h3>El carrito está vacío</h3>
+                      <a class="login-submit btn btn-primary" href="../index.html">¡Compra algo!</a>
                                         `;
       confirmaCompra.style.display = "none";
     }
@@ -83,7 +84,7 @@ function borrarProductos(e){
 }
 
 if (carritoCompleto === undefined || carritoCompleto.length == 0) {
-    carritoContainer.innerHTML = `
+  cart_container.innerHTML = `
                                   <h3>El carrito está vacío</h3>
                                   <a class="login-submit btn btn-primary" href="../index.html">¡Compra algo!</a>
                                   `;
@@ -114,9 +115,9 @@ if (carritoCompleto === undefined || carritoCompleto.length == 0) {
   }
   function calcTotal() {
     if (sumaTotal == 0) {
-      totalCarrito.style.display = "none";
+      total.style.display = "none";
     } else {
-      totalCarrito.innerHTML = `Total $${sumaTotal}`;
+      total.innerHTML = `Total $${sumaTotal}`;
     }
   }
   calcTotal();
