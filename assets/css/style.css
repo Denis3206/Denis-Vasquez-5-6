@@ -6,16 +6,20 @@
 }
 body{
   font-family: 'PT sans',sans-serif;
+  min-height: 100vh;
+  background-color: #0c192c;
+
 }
 
 .inicio {
   width: 100%;
-  height:50vh;
-  background-color:  #000000;
+  height:30vh;
+  
   background-size: cover;
   background-position: center;
 }
 .nav{
+
   position: fixed;
   width:100%;
   display: flex;
@@ -73,11 +77,14 @@ body{
 .scrol{
   height: 500px;
  
+ 
 }
 #contenido{
+ 
   display:flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+ 
  
 }
 
@@ -100,6 +107,7 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 }
 .btn-danger{
   margin: 15px;
@@ -150,6 +158,10 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
+}
+#formulario label{
+  color:red;
 }
 
 .main-admin{
@@ -157,6 +169,7 @@ body{
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
 }
 .close-icon{
   font-size: 1.5rem;

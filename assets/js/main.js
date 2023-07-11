@@ -74,8 +74,8 @@ if(!localStorage.getItem("prod")){
 
 productos=[
     {
-        id:1,nombre: "Pes 6", precio:30000},
-    {id:2,nombre:"Fifa 23", precio:20000}
+        id:1,nombre: "PES 6", precio:30000},
+    {id:2,nombre:"FIFA 23", precio:20000}
     
 ];
 localStorage.setItem("prod",JSON.stringify(productos));
@@ -92,16 +92,10 @@ const agregarProducto = () => {
   for (i=0;i<productos.length;i++){
     if(productos[i].nombre==nombre){
       Swal.fire("Producto ya existe");
-      let deleteIndex = productos.findIndex(function (product) {
-        return product.nombre ===nombre;
-      });
-      if (deleteIndex !== -1) {
-        productos.splice(deleteIndex, 1);
-        document.getElementById("contenido").removeChild(nodo);
-        localStorage.setItem("productos", JSON.stringify(productos));
-      }
+      return false;
     }
-  }
+    else {
+  
   let precio = document.getElementById("precio").value;
   id++;
   let productoNuevo = new producto(nombre, precio,id);
@@ -109,6 +103,8 @@ const agregarProducto = () => {
   
   localStorage.setItem("prod", JSON.stringify(productos));
   return productoNuevo;
+    }
+}
 }
 
 

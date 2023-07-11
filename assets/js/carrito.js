@@ -3,6 +3,7 @@ let inicio_login=document.getElementById("inicio_login");
 let cart_container=document.getElementById("cart-container");
 let total=document.getElementById("total");
 let confirmaCompra=document.getElementById("confirma-compra");
+let vaciarCarrito=document.getElementById("vaciar-carrito")
 let sumaTotal=0;
 
 const adminLogin = JSON.parse(localStorage.getItem("adminLogin")) || {
@@ -27,6 +28,7 @@ if (contadorProductos > 0 && contadorProductos != undefined) {
   contadorProd();
 } else {
   prodComprados.style.display = "none";
+  vaciarCarrito.style.display="none"
 };
   let idProd = 0;
 const carritoCompleto = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -43,14 +45,15 @@ carritoCompleto.forEach((producto) => {
         <p class="card-text">$${producto.precio}</p>
         </div>
         
-        <button class="btn btn-danger btn-sm elim-prod" id="borrar${idProd}">x</button>
-                                `;
+          `;
   let precio = parseInt(producto.precio);
   sumaTotal = sumaTotal + precio;
   cart_container.appendChild(prodCarrito);
-  let btnBorrar = document.getElementById(`borrar${idProd}`);
-  btnBorrar.addEventListener("click", (e) => {
-    
+ 
+ /*  let btnBorrar = document.getElementById(`borrar${idProd}`); 
+ <button class="btn btn-danger btn-sm elim-prod" id="borrar${idProd}">x</button>*/
+  vaciarCarrito.addEventListener("click", (e) => {
+    window.location.href="index.html"
     sumaTotal = sumaTotal - precio;
     calcTotal();
     contadorProductos--;
@@ -73,6 +76,7 @@ carritoCompleto.forEach((producto) => {
                       <a class="login-submit btn btn-primary" href="../index.html">¡Compra algo!</a>
                                         `;
       confirmaCompra.style.display = "none";
+      vaciarCarrito.style.display="none";
     }
   });
 });
@@ -89,9 +93,12 @@ if (carritoCompleto === undefined || carritoCompleto.length == 0) {
                                   <a class="login-submit btn btn-primary" href="../index.html">¡Compra algo!</a>
                                   `;
     confirmaCompra.style.display = "none";
+    vaciarCarrito.style.display="none";
+
   } else {
     
     confirmaCompra.style.display = "block";
+   
     confirmaCompra.onclick = (e) => {
       localStorage.setItem("prod-comprados", 0);
       e.preventDefault();
@@ -112,7 +119,16 @@ if (carritoCompleto === undefined || carritoCompleto.length == 0) {
         }
       });
     };
-  }
+    vaciarCarrito.style.display="block";
+    vaciarCarrito.addEventListener("click",function(){
+      e.preventDefault()
+      while(document.getElementById("cart-item").firstChild){
+        document.getElementById("cart-item").removeChild;
+      }
+    })
+      
+      }
+                                                            
   function calcTotal() {
     if (sumaTotal == 0) {
       total.style.display = "none";
