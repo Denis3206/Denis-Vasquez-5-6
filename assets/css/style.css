@@ -9,7 +9,7 @@ body{
   font-family: 'PT sans',sans-serif;
   min-height: 100vh;
   background-image: url(../img/fondo.jpg); 
-
+ 
 }
 
 .inicio {
@@ -102,6 +102,7 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 }
 .formulario{
   display: flex;
@@ -207,6 +208,15 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.main-cart h4{
+    color: red;
+}
+.main-cart h1{
+  color: red;
+}
+.contador p{
+  color: white;
 }
 
 .cart-title{

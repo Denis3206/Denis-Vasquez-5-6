@@ -5,14 +5,14 @@ let login =document.getElementById("login");
 let inicio_login= document.getElementById("inicio_login");
 
 let  btnLogin=document.getElementById("btn-login");
-let insertUser=document.getElementById("User");
+/* let insertUser=document.getElementById("User"); */
 
 const adminLogin=JSON.parse(localStorage.getItem("adminLogin")) || {
     admin:false
 }
 
 if (adminLogin.admin){
-insertUser.innerHTML=`<p id="user-name">Hola, Administrador</p>`;
+/* insertUser.innerHTML=`<p id="user-name">Hola, Administrador</p>`; */
 inicio_login.innerText="Cerrar";
 login.innerHTML=""
 login.innerHTML=`<h1>Hola, admin</h1>
