@@ -9,7 +9,7 @@ body{
   font-family: 'PT sans',sans-serif;
   min-height: 100vh;
   background-image: url(../img/fondo.jpg); 
-
+ background-repeat: no-repeat;
 }
 
 .inicio {
