@@ -12,6 +12,7 @@ let insertUser = document.getElementById("User");
 let deletableProd = false;
 
 let btnLogin = document.getElementById("btn-login");
+insertUser.style.display="None";
 
 const adminLogin = JSON.parse(localStorage.getItem("adminLogin")) || {
   admin: false
@@ -19,7 +20,7 @@ const adminLogin = JSON.parse(localStorage.getItem("adminLogin")) || {
 
 if (adminLogin.admin) {
   inicio_login.innerText = "Cerrar";
-
+  insertUser.style,display="flex";
   insertUser.innerHTML = `
     <p id="user-name">Hola, Administrador</p>
     `;
@@ -39,10 +40,11 @@ btnCrear.onclick = (e) => {
     formulario.style.display = "none";
     estadoFormulario.mostrar = false;
   } else {
-    btnCrear.innerText = "cancelar";
+    btnCrear.innerText = "Cancelar";
     formulario.style.display = "flex";
     estadoFormulario.mostrar = true;
   }
+  
 };
 
 
@@ -51,13 +53,15 @@ const carrito_1 = document.getElementById("carrito_1");
 
 const nombre = document.getElementById("nombre");
 const precio = document.getElementById("precio");
+const img=document.getElementById("ImagenAñadir");
 
 class producto {
-  constructor(nombre, precio, id) {
+  constructor(nombre, precio, id, img) {
 
     this.nombre = nombre;
     this.precio = precio;
     this.id = id;
+    this.img=img;
   }
 }
 let productos = JSON.parse(localStorage.getItem("productos")) || [];
@@ -66,14 +70,18 @@ if (productos.length===0) {
 
   productos = [
     {
-      id: 1,
+     
       nombre: "PES 6",
-      precio: 30000
+      precio: 30000,
+     id:1,
+      img:"https://i.3djuegos.com/juegos/1506/pro_evolution_soccer_6/fotos/ficha/pro_evolution_soccer_6-1681866.webp"
     },
     {
+      nombre: "EA SPORTS FC 24",
+      precio: 20000,
       id: 2,
-      nombre: "FIFA 23",
-      precio: 20000
+      img:"https://prod.assets.earlygamecdn.com/images/EA-Sports-FC-Cover-Messi.png?transform=article3x_webp"
+
     }
 
   ];
@@ -88,7 +96,7 @@ function displayDefaultProducts() {
     nodo.setAttribute("class", "card");
     nodo.setAttribute("style", "width: 18rem;");
     nodo.innerHTML = `
-      <img src="https://dummyimage.com/600x400/000/fff" class="card-img-top" alt="${elemento.nombre}">
+      <img src="${elemento.img}" class="card-img-top" style="width: 50%;" >
       <div class="card-body" id="card-body">
           <h5 class="card-title">${elemento.nombre}</h5>
           <p class="card-text">$${elemento.precio}</p>
@@ -143,8 +151,9 @@ const agregarProducto = () => {
     }
   }
   let precioValue = precio.value;
+  let imgValue=img.value;
   id++;
-  let productoNuevo = new producto(nombreValue, precioValue, id);
+  let productoNuevo = new producto(nombreValue, precioValue, id,imgValue);
   productos.unshift(productoNuevo);
 
   localStorage.setItem("productos", JSON.stringify(productos));
@@ -162,6 +171,7 @@ btnAñadir.addEventListener("click", (e) => {
     if (productoAgregado) {
       document.getElementById("nombre").value = "";
       document.getElementById("precio").value = "";
+      document.getElementById("ImagenAñadir").value="";
     }
 
     productos.forEach((elemento) => {
@@ -169,7 +179,7 @@ btnAñadir.addEventListener("click", (e) => {
       nodo.setAttribute("class", "card");
       nodo.setAttribute("style", "width: 18rem;");
       nodo.innerHTML = `
-                  <img src="https://dummyimage.com/600x400/000/fff" class="card-img-top" alt="${elemento.nombre}">
+                  <img src="${elemento.img}" class="card-img-top" style="width: 50%;">
                   <div class="card-body" id="card-body">
                       <h5 class="card-title">${elemento.nombre}</h5>
                       <p class="card-text">$${elemento.precio}</p>
@@ -230,7 +240,7 @@ productos.forEach((elemento) => {
   nodo.setAttribute("class", "card");
   nodo.setAttribute("style", "width: 18rem;");
   nodo.innerHTML = `
-              <img src="https://dummyimage.com/600x400/000/fff" class="card-img-top" alt="${elemento.nombre}">
+              <img src="${elemento.img}" class="card-img-top" style="width: 50%;">
               <div class="card-body" id="card-body">
                   <h5 class="card-title">${elemento.nombre}</h5>
                   <p class="card-text">$${elemento.precio}</p>
@@ -268,3 +278,45 @@ deleteButtons.forEach((deleteButton) => {
     }
   });
 });
+
+//// CAMBIO DE MONEDA 
+const monedaEl_one = document.getElementById('moneda-uno');
+const monedaEl_two = document.getElementById('moneda-dos');
+const cantidadEl_one = document.getElementById('cantidad-uno');
+const cantidadEl_two = document.getElementById('cantidad-dos');
+const cambioEl = document.getElementById('cambio');
+const tazaEl = document.getElementById('taza');
+
+
+function calculate(){
+    const moneda_one = monedaEl_one.value;
+    const moneda_two = monedaEl_two.value;
+
+   fetch(`https://api.exchangerate-api.com/v4/latest/${moneda_one}`)
+   .then(res => res.json() )
+   .then(data => {
+       const taza = data.rates[moneda_two];
+       
+       cambioEl.innerText = `1 ${moneda_one} = ${taza} ${moneda_two}`;
+
+       cantidadEl_two.value = (cantidadEl_one.value * taza).toFixed(2);
+
+    } );
+    
+}
+
+monedaEl_one.addEventListener('change', calculate);
+cantidadEl_one.addEventListener('input', calculate);
+monedaEl_two.addEventListener('change', calculate);
+cantidadEl_two.addEventListener('input', calculate);
+
+taza.addEventListener('click', () =>{
+    const temp = monedaEl_one.value;
+    monedaEl_one.value = monedaEl_two.value;
+    monedaEl_two.value = temp;
+    calculate();
+} );
+
+
+calculate();
+
