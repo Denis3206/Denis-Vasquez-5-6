@@ -8,12 +8,29 @@
 body{
   font-family: 'PT sans',sans-serif;
   min-height: 100vh;
-  background-image: url(../img/fondo.jpg); 
- background-repeat: no-repeat;
+ /*  background-image: url(../img/fondo.jpg);  */
+ margin: 0;
+  padding: 0;
+  background: linear-gradient(-45deg,black,rgb(98, 7, 7));
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .inicio {
   width: 100%;
+  max-width:1000px;
   height:30vh;
   background-size: cover;
   background-position: center;
