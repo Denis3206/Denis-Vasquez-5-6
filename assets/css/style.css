@@ -269,6 +269,10 @@ body{
   font-family: cursive;
   
 }
+.card-img-top{
+  background-size: cover;
+  height: 180px;
+}
 
 .card:hover {
   color: rgb(88 199 250 / 100%);
