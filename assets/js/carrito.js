@@ -41,6 +41,7 @@ carritoCompleto.forEach((producto) => {
   }
   prodCarrito.innerHTML = `
         <div class="cart-item">
+        <a class="close-icon-carrito" id="delete${idProd}" href="carrito.html"><i class="fa-solid fa-xmark"></i></a>
         <p class="card-title">${producto.nombre}</p>
         <p class="card-text">$${producto.precio}</p>
         </div>
@@ -50,8 +51,34 @@ carritoCompleto.forEach((producto) => {
   sumaTotal = sumaTotal + precio;
   cart_container.appendChild(prodCarrito);
  
- /*  let btnBorrar = document.getElementById(`borrar${idProd}`); 
- <button class="btn btn-danger btn-sm elim-prod" id="borrar${idProd}">x</button>*/
+ let Borrar_unidad = document.getElementById(`delete${idProd}`); 
+  Borrar_unidad.addEventListener("click",(e)=>{
+    sumaTotal=sumaTotal-precio
+    calcTotal()
+    contadorProductos--
+    contadorProd();
+    if (contadorProductos <= 0 || contadorProductos == undefined) {
+      prodComprados.style.display = "none";
+      localStorage.setItem("prod-comprados", 0);
+    }
+    borrarProductos(e);
+   
+    const index = carritoCompleto.indexOf(producto);
+    if (index > -1) {
+      carritoCompleto.splice(index, 1);
+    }
+    
+    localStorage.setItem("carrito", JSON.stringify(carritoCompleto));
+  
+  if (carritoCompleto.length == 0) {
+    cart_container.innerHTML = `
+                     <h3>El carrito está vacío</h3>
+                    <a class="login-submit btn btn-primary" href="../index.html">¡Compra algo!</a>
+                                      `;
+    confirmaCompra.style.display = "none";
+    vaciarCarrito.style.display="none";
+  }
+})
   vaciarCarrito.addEventListener("click", (e) => {
     window.location.href="index.html"
     sumaTotal = sumaTotal - precio;
