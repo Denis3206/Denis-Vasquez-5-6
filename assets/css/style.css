@@ -141,6 +141,10 @@ body{
   flex-direction: column;
   
 }
+
+.login label{
+color:red;
+}
 .formulario{
   display: flex;
   justify-content: center;
