@@ -197,6 +197,17 @@ body{
   color:red;
   cursor:pointer;
 }
+.close-icon-carrito{
+  font-size: 1.5rem;
+  color:blue;
+  background-color: none;
+  padding-bottom: 150px;
+}
+.close-icon-carrito:hover{
+  color:red;
+  cursor:pointer;
+}
+
 .contenido{
   display: grid;
   grid-template-columns: repeat(4,1fr);
