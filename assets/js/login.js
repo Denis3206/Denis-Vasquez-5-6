@@ -1,4 +1,17 @@
+///FONDO LOGIN
+const particleBackground = document.querySelector('.particle-background');
 
+for (let i = 0; i < 50; i++) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.width = `${Math.random() * 10}px`;
+  particle.style.height = `${Math.random() * 10}px`;
+  particle.style.left = `${Math.random() * 100}%`;
+  particle.style.top = `${Math.random() * 100}%`;
+  particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+  particleBackground.appendChild(particle);
+}
+////////////
 const Usuario = document.getElementById("Usuario");
 const Contraseña=document.getElementById("Contraseña");
 let login =document.getElementById("login");
